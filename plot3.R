@@ -5,7 +5,7 @@
 ## Get the column names
 tmp = read.csv("household_power_consumption.txt", sep=";", nrows=1)
 
-## Just some rows
+## Just some rows containing the required records
 classes = c("character", "character", rep("numeric", 7))
 data = read.csv("household_power_consumption.txt", sep=";", 
                 skip=60000, nrows=10000, colClasses = classes, na.strings = "?")
@@ -24,17 +24,9 @@ data$Minute = as.numeric(format(data$DateTime, format="%M"))
 ## Just data from the dates 2007-02-01 and 2007-02-02
 data = subset(data, data$Year == 2007 & data$Month == 2 & (data$Day == 1 | data$Day == 2))
 
-## Looking for missing values
-columns = names(data)
-for (column in columns) {
-  print(paste("The column",column, "has",sum(data[,column] == "?"),"? values"))
-}
-
 ## Cleaning objects useless
 rm(tmp)
 rm(classes)
-rm(columns)
-rm(column)
 
 
 
